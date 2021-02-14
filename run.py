@@ -12,7 +12,7 @@ os.mkdir(OUTDIR)
 
 def main():
     tagNum = input("please input the start ID: ")
-    proc = input("capture now: ").strip()
+    proc = input("capture now(y|q): ").strip()
     while proc == 'y' or proc == 'Y':
         # grab fullscreen
         im = ImageGrab.grab()
@@ -20,7 +20,7 @@ def main():
         im.save(FULLSCREEN)
         crop_save(FULLSCREEN, os.path.join(OUTDIR, tagNum + '.png'))
         tagNum = str(int(tagNum) + 1)
-        proc = input("capture now: ").strip()
+        proc = input("capture now(y|q): ").strip()
 
 
 if __name__ == "__main__":
