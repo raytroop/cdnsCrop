@@ -1,3 +1,5 @@
+""" https://stackoverflow.com/a/11427501/8037585 """
+
 import numpy as np
 import cv2
 
@@ -26,9 +28,12 @@ for cnt in contours:
 
 print("max area: {}".format(maxArea))
 print(maxApprox)
-x0, y0 = maxApprox[0][0]
-x1, y1 = maxApprox[2][0]
-# cv2.drawContours(img, [maxApprox], 0, (0, 0, 255), -1)
+
+x0, x1 = 489, 1750
+y0, y1 = 248, 956
+if maxApprox is not None:
+    x0, y0 = maxApprox[0][0]
+    x1, y1 = maxApprox[2][0]
 
 print(img.shape)
 cv2.imshow('img', img[y0:y1, x0:x1, :])
