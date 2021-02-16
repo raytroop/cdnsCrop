@@ -1,27 +1,33 @@
 import os
-import shutil
 import pyscreenshot as ImageGrab
-import cv2
 from detect import crop_save
+"""
+Enter -> continue
+q|Q -> exit
+ """
 
 FULLSCREEN = "fullscreen.png"
 OUTDIR = "procimgdir"
-if os.path.isdir(OUTDIR):
-    shutil.rmtree(OUTDIR)
-os.mkdir(OUTDIR)
+#if os.path.isdir(OUTDIR):
+#    shutil.rmtree(OUTDIR)
+os.makedirs(OUTDIR, exist_ok=True)
 
 def main():
-    tagNum = input("please input the start ID: ")
-    proc = input("capture now(y|q): ").strip()
-    while proc == 'y' or proc == 'Y':
+    tagNum = int(input("please input the start ID: "))
+    tag0 = tagNum
+    procNow = input("Start Capture ? (Q to quit): ").strip()
+
+    while procNow != 'q' or procNow != 'Q':
         # grab fullscreen
         im = ImageGrab.grab()
         # # save image file
         im.save(FULLSCREEN)
-        crop_save(FULLSCREEN, os.path.join(OUTDIR, tagNum + '.png'))
-        tagNum = str(int(tagNum) + 1)
-        proc = input("capture now(y|q): ").strip()
-
+        crop_save(FULLSCREEN, os.path.join(OUTDIR, str(tagNum) + '.png'))
+        capCont = input("capture now(Q to quit): ").strip()
+        if capCont in ('q', 'Q'):
+            break
+        tagNum = tagNum + 1
+    print('total images: {}'.format(tagNum - tag0 + 1))
 
 if __name__ == "__main__":
     main()

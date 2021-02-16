@@ -32,6 +32,7 @@ def crop_save(srcimg, filename):
 
     # print("max area: {}".format(maxArea))
     # print(maxApprox)
+    # FIXME default value of x0, x1, y0, y1 come from normal capture
     x0, x1 = 489, 1750
     y0, y1 = 248, 956
     if maxApprox is not None:
