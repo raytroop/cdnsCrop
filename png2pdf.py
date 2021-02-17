@@ -13,7 +13,7 @@ os.mkdir(PDFDIR)
 
 flist = glob.glob(os.path.join(INPUTDIR, '*'))
 flist = [os.path.basename(x) for x in flist]
-print(flist)
+# print(flist)
 for fn in tqdm(flist):
     img = Image.open(os.path.join(INPUTDIR, fn))
     img_pdf = img.convert('RGB')

@@ -3,10 +3,15 @@ import cv2
 
 MINWIDTH = 500
 MINHEIGHT = 500
+X0, X1 = 489, 1750
+Y0, Y1 = 248, 956
 
-
-def crop_save(srcimg, filename):
+def crop_save(srcimg, filename, auto=True):
     img = cv2.imread(srcimg)
+    if not auto:
+        cv2.imwrite(filename, img[Y0:Y1, X0:X1, :])
+        return
+
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     _, thresh = cv2.threshold(gray, 254, 255, 0)
     contours, _ = cv2.findContours(thresh, 1, 2)
